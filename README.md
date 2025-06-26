@@ -110,7 +110,6 @@ g++ -O3 -o sorting sorting.cpp
 This runs `Merge Sort` on `input1000.txt` and outputs the sorted numbers to `output.txt` while logging the execution time in `time.txt` and verify that the `Merge Sort` algorithm sorts data correctly without modifying it in `test.txt`.
 
 > [!NOTE]
-
 > If you want to test all algorithms simultaneously:
 > - Pass the `dataSet` by value instead of by reference 
 > - Comment all `break` statements except the one before the `default` statement in the switch-case.
