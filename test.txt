@@ -1,0 +1,8 @@
+[0] SelectionSort ✅ Sort verified: correct order and elements preserved.
+[1] InsertionSort ✅ Sort verified: correct order and elements preserved.
+[2] MergeSort ✅ Sort verified: correct order and elements preserved.
+[3] QuickSort ✅ Sort verified: correct order and elements preserved.
+[4] RandomizedQuickSort ✅ Sort verified: correct order and elements preserved.
+[5] HeapSort ✅ Sort verified: correct order and elements preserved.
+[6] CountSort ✅ Sort verified: correct order and elements preserved.
+[7] HybridSort ✅ Sort verified: correct order and elements preserved.

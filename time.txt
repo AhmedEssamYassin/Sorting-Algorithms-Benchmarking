@@ -1,0 +1,28 @@
+Testing on data size = 500000
+Using Selection Sort
+Time consumed to execute this block of code is: 78.380538 s
+
+Using Insertion Sort
+Time consumed to execute this block of code is: 40.205239 s
+
+Using Merge Sort
+Time consumed to execute this block of code is: 0.100638 s
+
+Using Quick Sort
+Time consumed to execute this block of code is: 0.095598 s
+
+Using Randomized Quick Sort
+Time consumed to execute this block of code is: 0.033714 s
+
+Using Heap Sort
+Time consumed to execute this block of code is: 0.065844 s
+
+Using Count Sort
+Time consumed to execute this block of code is: 0.036917 s
+
+Using Hybrid Sort
+Time consumed to execute this block of code is: 0.032639 s
+
+Using std Sort
+Time consumed to execute this block of code is: 0.029326 s
+
