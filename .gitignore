@@ -1,0 +1,51 @@
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Agents
+.agents/
+
+# C++ Build Artifacts
+*.exe
+*.o
+*.obj
+*.out
+*.exe.stackdump
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.dll
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Visual Studio cache/options directory
+.vs/
+# Uncomment if you have tasks, launch, or settings in VS Code
+# .vscode/
+
+# Build artifacts
+sorting.exe
+sorting
+*.o
+
+# Output files
+output.txt
+time.txt
+test.txt
+results/
+
+# Cursor
+#  Cursor is an AI-powered code editor.`.cursorignore` specifies files/directories to 
+#  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
+#  refer to https://docs.cursor.com/context/ignore-files
+.cursorignore
+.cursorindexingignore

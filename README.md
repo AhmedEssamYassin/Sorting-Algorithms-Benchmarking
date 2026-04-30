@@ -13,33 +13,35 @@ This file implements and compares various sorting algorithms based on their effi
 - Hybrid Sort (combining multiple strategies)
 
 ## File Structure
-| File             | Description |
-|-----------------|-------------|
-| `sorting.cpp`   | Implementation of multiple sorting algorithms and efficiency analysis |
-| `Efficiency_Analysis.h` | Header file for performance evaluation functions |
-| `input.txt`     | Sample input file containing numbers to be sorted |
-| `output.txt`    | Output file with sorted numbers |
-| `time.txt`      | File storing execution time of sorting algorithms |
-| `test.txt`      | File storing the verification of sorting algorithms |
+| File                    | Description                                                           |
+| ----------------------- | --------------------------------------------------------------------- |
+| `sorting.cpp`           | Implementation of multiple sorting algorithms and efficiency analysis |
+| `Efficiency_Analysis.h` | Header file for performance evaluation functions                      |
+| `input.txt`             | Sample input file containing numbers to be sorted                     |
+| `output.txt`            | Output file with sorted numbers                                       |
+| `time.txt`              | File storing execution time of sorting algorithms                     |
+| `test.txt`              | File storing the verification of sorting algorithms                   |
 
 ## Performance Comparison
 The performance of each sorting algorithm is measured based on execution time, and results are written to `time.txt`. The choice of sorting algorithm can be optimized based on the input size and data distribution.
 
 ### Expected Time and Space Complexities:
 
-| Algorithm      | Best Case   | Average Case | Worst Case  | Space Complexity |
-|--------------|------------|---------------|-------------|-----------------|
-| Selection Sort | O(n²)      | O(n²)       | O(n²)       | O(1)            |
-| Insertion Sort | O(n)       | O(n²)       | O(n²)       | O(1)            |
-| Merge Sort    | O(n log n) | O(n log n)   | O(n log n)  | O(n)            |
-| Quick Sort    | O(n log n) | O(n log n)   | O(n²)       | O(log n)        |
-| Heap Sort     | O(n log n) | O(n log n)   | O(n log n)  | O(1)            |
-| Count Sort    | O(n + k)   | O(n + k)     | O(n + k)    | O(n + k)        |
-| Hybrid Sort   | O(n log n) | O(n log n)   | O(n log n)  | O(n)            |
+| Algorithm             | Best Case  | Average Case | Worst Case  | Space Complexity |
+| --------------------- | ---------- | ------------ | ----------- | ---------------- |
+| Selection Sort        | O(n²)      | O(n²)        | O(n²)       | O(1)             |
+| Insertion Sort        | O(n)       | O(n²)        | O(n²)       | O(1)             |
+| Merge Sort            | O(n log n) | O(n log n)   | O(n log n)  | O(n)             |
+| Quick Sort            | O(n log n) | O(n log n)   | O(n log n)* | O(n)             |
+| Randomized Quick Sort | O(n log n) | O(n log n)   | O(n log n)* | O(n)             |
+| Heap Sort             | O(n log n) | O(n log n)   | O(n log n)  | O(1)             |
+| Count Sort            | O(n + k)   | O(n + k)     | O(n + k)    | O(n + k)         |
+| Hybrid Sort           | O(n log n) | O(n log n)   | O(n log n)  | O(n)             |
 
 > [!NOTE]
-> the `k` in `Count Sort` is the size of possible numbers in the data set
- 
+> * Quick Sort and Randomized Quick Sort fallback to Heap Sort if recursion depth exceeds limits (Introsort pattern), guaranteeing O(n log n) worst-case time complexity, but taking O(n) space.
+> 
+> * The `k` in `Count Sort` is the range of possible numbers in the data set (`max - min + 1`).
 
 ## Command-Line Arguments
 The program takes the following command-line arguments:
@@ -55,16 +57,16 @@ Where:
 - `<test_file>`: Path to store Verification of algorithms.
 
 ### Algorithm Selection:
-| Number | Algorithm |
-|--------|-----------|
-| 0 | Selection Sort |
-| 1 | Insertion Sort |
-| 2 | Merge Sort |
-| 3 | Quick Sort |
-| 4 | Randomized Quick Sort|
-| 5 | Heap Sort|
-| 6 | Count Sort|
-| 7 | Hybrid Sort |
+| Number | Algorithm             |
+| ------ | --------------------- |
+| 0      | Selection Sort        |
+| 1      | Insertion Sort        |
+| 2      | Merge Sort            |
+| 3      | Quick Sort            |
+| 4      | Randomized Quick Sort |
+| 5      | Heap Sort             |
+| 6      | Count Sort            |
+| 7      | Hybrid Sort           |
 
 Example usage:
 ```
