@@ -1,11 +1,10 @@
 #pragma once
-#include <bits/stdc++.h>
+#include <utility>
+#include <bit>
 #include "Sort.h"
 #include "InsertionSort.h"
 #include "HeapSort.h"
 using namespace std;
-
-#define INSERTION_THRESHOLD 32
 
 class QuickSort : public Sort
 {
@@ -13,22 +12,19 @@ private:
     InsertionSort insertionSortHelper;
     HeapSort heapSortHelper;
 
-    int partition(vector<ll> &arr, int low, int high)
+    int hoarePartition(vector<ll> &arr, int low, int high)
     {
-        ll pivot = arr[high]; // Select the last element as the pivot
-        int i = low - 1;      // Index of the smaller element
+        ll pivot = arr[low + (high - low) / 2];
+        int i = low - 1;
+        int j = high + 1;
 
-        for (int j = low; j < high; j++)
+        while (true)
         {
-            // If the current element is smaller than or equal to the pivot
-            if (arr[j] <= pivot)
-            {
-                i++; // Increment the index of the smaller element
-                swap(arr[i], arr[j]);
-            }
+            do { i++; } while (arr[i] < pivot);
+            do { j--; } while (arr[j] > pivot);
+            if (i >= j) return j;
+            swap(arr[i], arr[j]);
         }
-        swap(arr[i + 1], arr[high]); // Place pivot in its correct position
-        return (i + 1);
     }
 
     void quickSort(vector<ll> &arr, int low, int high, int depthLimit)
@@ -46,9 +42,9 @@ private:
             }
             else
             {
-                int pivotIndex = partition(arr, low, high);
-                quickSort(arr, low, pivotIndex - 1, depthLimit - 1);
-                quickSort(arr, pivotIndex + 1, high, depthLimit - 1);
+                int p = hoarePartition(arr, low, high);
+                quickSort(arr, low, p, depthLimit - 1);
+                quickSort(arr, p + 1, high, depthLimit - 1);
             }
         }
     }
@@ -59,7 +55,7 @@ public:
     void sort(vector<ll> &arr) override
     {
         if (arr.empty()) return;
-        int maxDepth = 2 * __bit_width(arr.size());
+        int maxDepth = 2 * std::bit_width(arr.size());
         quickSort(arr, 0, arr.size() - 1, maxDepth);
     }
 };

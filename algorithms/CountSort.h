@@ -1,5 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <stdexcept>
 #include "Sort.h"
 using namespace std;
 

@@ -1,12 +1,11 @@
 #pragma once
-#include <bits/stdc++.h>
+#include <utility>
+#include <bit>
+#include <cstdint>
 #include "Sort.h"
 #include "InsertionSort.h"
 #include "HeapSort.h"
 using namespace std;
-
-#define HYBRID_INSERTION_THRESHOLD 64
-#define rng(l, r) uniform_int_distribution<int64_t>(l, r)(Sort::rnd)
 
 class HybridSort : public Sort
 {
@@ -16,8 +15,11 @@ private:
 
     int hoarePartition(vector<ll> &arr, int low, int high)
     {
-        int randomPivotIndex = rng(low, high);
-        ll pivot = arr[randomPivotIndex];
+        int randomPivotIndex = getRandomNumber(low, high);
+        
+        // Move pivot to arr[low] so Hoare partition never returns `high`
+        swap(arr[randomPivotIndex], arr[low]);
+        ll pivot = arr[low];
         
         int i = low - 1;
         int j = high + 1;
@@ -60,7 +62,7 @@ public:
     void sort(vector<ll> &arr) override
     {
         if (arr.empty()) return;
-        int maxDepth = 2 * __bit_width(arr.size()); // Use Merge Sort if depth exceeds this
+        int maxDepth = 2 * std::bit_width(arr.size()); // Use Merge Sort if depth exceeds this
         hybridSort(arr, 0, arr.size() - 1, maxDepth);
     }
 };

@@ -1,4 +1,13 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <chrono>
+#include <unordered_map>
+#include <functional>
+#include <memory>
+#include <iomanip>
 #include "algorithms/EfficiencyAnalysis.h"
 #include "algorithms/Sort.h"
 #include "algorithms/InsertionSort.h"
@@ -15,14 +24,14 @@ using namespace std;
 ofstream timeFile;
 ofstream testFile;
 
-function<uint64_t()> random_address = []() -> uint64_t
+function<uint64_t()> randomAddress = []() -> uint64_t
 {
     char *p = new char;
     uint64_t addr = reinterpret_cast<uint64_t>(p);
     delete p;
     return addr;
 };
-const uint64_t SEED = chrono::steady_clock::now().time_since_epoch().count() * (random_address() | 1);
+const uint64_t SEED = chrono::steady_clock::now().time_since_epoch().count() * (randomAddress() | 1);
 std::mt19937 Sort::rnd(SEED);
 
 enum
@@ -101,23 +110,22 @@ void verify(const vector<ll> &data, Sort *sorter, int sorterID)
 // Times the given sorter and std::sort on the same data, then writes a comparison to timeFile.
 void sortInterface(vector<ll> &data, unique_ptr<Sort> sorter, int sorterID, vector<ll> &datasetCopy)
 {
-    using Clock = chrono::steady_clock;
     string algoName = sorter->getName();
 
     // --- Time the custom algorithm ---
     timeFile << algoName << "\n";
-    auto algoStart = Clock::now();
+    EfficiencyAnalysis algoTimer;
     sorter->sort(data);
-    long double algoTime = chrono::duration<long double>(Clock::now() - algoStart).count();
+    long double algoTime = algoTimer.stop();
     timeFile << "Time: " << fixed << setprecision(6) << algoTime << " s\n";
 
     verify(data, sorter.get(), sorterID);
 
     // --- Time std::sort on the same original data ---
     timeFile << "std::sort\n";
-    auto stdStart = Clock::now();
+    EfficiencyAnalysis stdTimer;
     sort(datasetCopy.begin(), datasetCopy.end());
-    long double stdTime = chrono::duration<long double>(Clock::now() - stdStart).count();
+    long double stdTime = stdTimer.stop();
     timeFile << "Time: " << fixed << setprecision(6) << stdTime << " s\n";
 
     // --- Comparison summary ---

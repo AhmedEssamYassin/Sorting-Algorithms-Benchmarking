@@ -13,7 +13,7 @@ def main():
 
     print(f"\n{'='*50}\nTest Verification Results\n{'='*50}")
     for file in testFiles:
-        with open(file, 'r') as f:
+        with open(file, 'r', encoding='utf-8') as f:
             content = f.read().strip()
             # If the file contains the failure message, flag it
             if "Verification failed" in content:

@@ -1,12 +1,11 @@
 #pragma once
-#include <bits/stdc++.h>
+#include <utility>
+#include <bit>
+#include <cstdint>
 #include "Sort.h"
 #include "InsertionSort.h"
 #include "HeapSort.h"
 using namespace std;
-
-#define INSERTION_THRESHOLD 32
-#define rng(l, r) uniform_int_distribution<int64_t>(l, r)(Sort::rnd)
 
 class RandomizedQuickSort : public Sort
 {
@@ -14,28 +13,23 @@ private:
     InsertionSort insertionSortHelper;
     HeapSort heapSortHelper;
 
-    int randomizedPartition(vector<ll> &arr, int low, int high)
+    int hoarePartition(vector<ll> &arr, int low, int high)
     {
-        // Pick a random pivot index between low and high
-        int randomPivotIndex = rng(low, high);
-
-        // Swap the randomly chosen pivot with the last element
-        swap(arr[randomPivotIndex], arr[high]);
-
-        ll pivot = arr[high];
+        int randomPivotIndex = getRandomNumber(low, high);
+        
+        swap(arr[randomPivotIndex], arr[low]);
+        ll pivot = arr[low];
+        
         int i = low - 1;
+        int j = high + 1;
 
-        // Standard partition process
-        for (int j = low; j < high; j++)
+        while (true)
         {
-            if (arr[j] <= pivot)
-            {
-                i++;
-                swap(arr[i], arr[j]);
-            }
+            do { i++; } while (arr[i] < pivot);
+            do { j--; } while (arr[j] > pivot);
+            if (i >= j) return j;
+            swap(arr[i], arr[j]);
         }
-        swap(arr[i + 1], arr[high]);
-        return (i + 1);
     }
 
     // Randomized quicksort function
@@ -54,9 +48,9 @@ private:
             }
             else
             {
-                int pivotIndex = randomizedPartition(arr, low, high);
-                randomizedQuickSort(arr, low, pivotIndex - 1, depthLimit - 1);
-                randomizedQuickSort(arr, pivotIndex + 1, high, depthLimit - 1);
+                int p = hoarePartition(arr, low, high);
+                randomizedQuickSort(arr, low, p, depthLimit - 1);
+                randomizedQuickSort(arr, p + 1, high, depthLimit - 1);
             }
         }
     }
@@ -67,7 +61,7 @@ public:
     void sort(vector<ll> &arr) override
     {
         if (arr.empty()) return;
-        int maxDepth = 2 * __bit_width(arr.size());
+        int maxDepth = 2 * std::bit_width(arr.size());
         randomizedQuickSort(arr, 0, arr.size() - 1, maxDepth);
     }
 };

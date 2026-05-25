@@ -1,10 +1,7 @@
 #pragma once
-#include <bits/stdc++.h>
 #include "Sort.h"
 #include "InsertionSort.h"
 using namespace std;
-
-#define INSERTION_THRESHOLD 32
 
 class MergeSort : public Sort
 {

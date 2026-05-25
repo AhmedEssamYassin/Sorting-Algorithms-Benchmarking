@@ -2,6 +2,7 @@ CXX = g++
 CXXFLAGS = -O3 -std=c++2b -Wall -Wextra
 
 SRCS = $(wildcard *.cpp)
+HEADERS = $(wildcard algorithms/*.h)
 
 ifeq ($(OS),Windows_NT)
     # Dynamically detect absolute system Python path and safely quote it to prevent space issues
@@ -25,10 +26,10 @@ endif
 all: $(TARGETS)
 
 ifeq ($(OS),Windows_NT)
-%.exe: %.cpp
+%.exe: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -o $@ $<
 else
-%: %.cpp
+%: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -o $@ $<
 endif
 
